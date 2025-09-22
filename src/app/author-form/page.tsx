@@ -33,40 +33,48 @@ export default function AuthorFormPage() {
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
       <form className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md w-full items-center justify-center text-center" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="mb-4 text-3xl font-bold">Add Author</h1>
-        <div className="mb-4">
+        <div className="mb-4" role="alert">
           <label className="mb-2 block font-bold" htmlFor="name">Name:</label>
           <input 
             {...register("name")}
             className="w-full rounded border p-2" 
             type="text" id="name" name="name" 
-            required value={name} onChange={(e) => setName(e.target.value)} />
+            required value={name} onChange={(e) => setName(e.target.value)}
+            aria-describedby="name-error"
+            aria-invalid={!!errors.name} />
             {errors.name && <p>{errors.name.message}</p>}
         </div>
-        <div className="mb-4">
+        <div className="mb-4" role="alert">
           <label className="mb-2 block font-bold" htmlFor="birthDate">Birth Date:</label>
           <input 
             {...register("birthDate")}
             className="w-full rounded border p-2" 
             type="date" id="birthDate" name="birthDate" 
-            required value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+            required value={birthDate} onChange={(e) => setBirthDate(e.target.value)}
+            aria-describedby="birthDate-error"
+            aria-invalid={!!errors.birthDate} />
             {errors.birthDate && <p>{errors.birthDate.message}</p>}
         </div>
-        <div className="mb-4">
+        <div className="mb-4" role="alert">
           <label className="mb-2 block font-bold" htmlFor="description">Description:</label>
           <textarea 
             {...register("description")}
             className="w-full rounded border p-2" 
             id="description" name="description" 
-            required value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            required value={description} onChange={(e) => setDescription(e.target.value)}
+            aria-describedby="description-error"
+            aria-invalid={!!errors.description}></textarea>
             {errors.description && <p>{errors.description.message}</p>}
         </div>
-        <div className="mb-4">
+        <div className="mb-4" role="alert">
           <label className="mb-2 block font-bold" htmlFor="image">Image URL:</label>
           <input 
             {...register("image")}
             className="w-full rounded border p-2" 
             type="url" id="image" name="image" 
-            required value={image} onChange={(e) => setImage(e.target.value)} />
+            required value={image} onChange={(e) => setImage(e.target.value)}
+            aria-describedby="image-error"
+            aria-invalid={!!errors.image} />
             {errors.image && <p>{errors.image.message}</p>}
         </div>
         <Link href="/" className="button rounded bg-gray-500 px-4 py-3 font-bold text-white mr-4">Back</Link>

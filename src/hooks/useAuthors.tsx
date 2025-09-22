@@ -4,6 +4,7 @@ import { Author } from '../types/Author';
 
 interface AuthorState {
     authors: Author[];
+    favoriteAuthors: Author[];
     loading: boolean;
     error: string | null;
     fetchAuthors: () => void;
@@ -11,10 +12,13 @@ interface AuthorState {
     addAuthor: (newAuthor: Author) => void;
     updateAuthor: (updatedAuthor: Author) => void;
     removeAuthor: (authorToRemove: Author) => void;
+    addFavoriteAuthor: (author: Author) => void;
+    removeFavoriteAuthor: (authorToRemove: Author) => void;
 }
 
 const useAuthorStore = create<AuthorState>((set, get) => ({
   authors: [],
+  favoriteAuthors: [],
   loading: true,
   error: null,
 
@@ -31,6 +35,20 @@ const useAuthorStore = create<AuthorState>((set, get) => ({
     } catch (error: Error | unknown) {
       set({ error: (error as Error).message, loading: false });
     }
+  },
+
+  addFavoriteAuthor: (author: Author) => {
+    set((state) => ({
+      favoriteAuthors: [...state.favoriteAuthors, author],
+    }));
+  },
+
+  removeFavoriteAuthor: (authorToRemove: Author) => {
+    set((state) => ({
+      favoriteAuthors: state.favoriteAuthors.filter(
+        (author) => author.name !== authorToRemove.name
+      ),
+    }));
   },
 
   getAuthorById: (name: string) => {

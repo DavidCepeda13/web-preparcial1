@@ -2,6 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Realice	un	fork	del	siguiente	repositorio: https://github.com/isis3710-uniandes/bookstore-back
+
+- Made a docker build using the next command:
+  `docker build ./ -t bookstore`
+- Excute the image using the command:
+  `docker run -d -p 127.0.0.1:8080:8080 bookstore`
+  • Virify that the API is working using the URL:
+  `http://127.0.0.1:8080/api/author`
+
+Before run the project, you must to install all the dependencies:
+
+`cd web-preparcial1`
+
+`npm install`
+
 First, run the development server:
 
 ```bash
@@ -16,21 +31,34 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<h2>Architecture</h2>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The architecture used in this project is Component oriented. You cand find one folder by component. Each folder contains a page if the porpuse of the component is to be show as a page. On the other hand, if it does not contains a page that means that the component was made to be re-used. 
 
-## Learn More
+The decision of made use of pages is to follow the standard of Routes of Next.js. Te next diagram shows the directory hierarchy:
 
-To learn more about Next.js, take a look at the following resources:
+src/
+├── app/
+│   ├── author-edit/
+│   │   └── [authorId]/
+│   ├── author-favorites/
+│   │   └── page.tsx
+│   ├── author-form/
+│   │   └── page.tsx
+│   ├── author-list/
+│   │   └── page.tsx
+│   ├── author-card.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── hooks/
+│   └── useAuthors.tsx
+├── types/
+│   ├── validations/
+│   └── Author.tsx
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Option B
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The option developed on the part B was the accecibility option. It can be validated in soome components like buttons (e.g. like button) it contains `aria-labels` and `aria-pressed`. Also, you can varify the form inputs where it is validating that the informations is correct and in case of not it will notify by the `aria-invalid` and `aria-described`. The compoenents are accesed via keyborad using `Tab.`
